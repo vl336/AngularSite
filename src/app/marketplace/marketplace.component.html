@@ -1,0 +1,45 @@
+<div class="container">
+    <table class="table table-responsive table-striped" style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Manufacturer</th>
+        </tr>
+        <tr *ngFor="let row of products">
+            <td>{{row.Name}}</td>
+            <td>{{row.Price}}</td>
+            <td>{{row.Quantity}}</td>
+            <td>{{row.Manufacturer}}</td>
+        </tr>
+    </table>
+    <form autocomplete="off">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input required maxlength="25" minlength="3" ngModel name="name" id="name" #name="ngModel" (change)="log(name)" type="text" class="form-control">
+            <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+                <div *ngIf="name.hasError('required')">Name is required</div>
+                <div *ngIf="name.hasError('minlength')">Name is minimum 3 symbol</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input ngModel name="price" #price="ngModel" id="price" type="number" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input ngModel name="quantity" #quantity="ngModel" id="quantity" type="number" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="manufacturer">Manufacturer:</label>
+            <input ngModel name="manufacturer" #manufacturer="ngModel" id="manufacturer" type="text" class="form-control">
+        </div>
+        <div  class="form-group">
+            <button class="btn btn-primary"
+                (click)="addProduct(name.value, price.value, quantity.value, manufacturer.value)">
+                Add
+            </button>
+            <label *ngIf="added" disabled="true">{{name.value}} was successfully added!</label>
+        </div>
+    </form>
+</div>
