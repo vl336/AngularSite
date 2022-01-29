@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Product } from 'src/app/models/product';
 import {Observable} from "rxjs";
 import {MatRadioGroup} from "@angular/material/radio";
 import {ProductService} from "../shared/product.service";
+import {NgModel} from "@angular/forms";
 
 
 @Component({
@@ -12,11 +14,12 @@ import {ProductService} from "../shared/product.service";
 })
 export class MarketplaceComponent implements OnInit {
     dataSource:any
-    displayedColumns: string[] = ['position', 'name', 'price', 'quantity', 'description'];
-
-    marketplaceType:any
+    pageSize: number = 15;
+    pageIndex: number = 0;
+    pageLength: number = 100;
 
     added: boolean = false;
+    paginator: NgModel|any;
 
     constructor(private service: ProductService) {
         service.getProducts().subscribe((prods) => {
@@ -25,18 +28,11 @@ export class MarketplaceComponent implements OnInit {
         });
     }
 
-    addProduct(name:string,
-               price:number,
-               quantity:number,
-               manufacturer:string):void {
-        console.log(this.marketplaceType)
-        this.added = true;
-    }
-
     ngOnInit(): void {
     }
 
-    log(x:any) {
-        console.log(x)
+    onPaginatorChange($event: PageEvent) {
+        console.log($event)
+        this.pageIndex = $event.pageIndex;
     }
 }

@@ -1,8 +1,10 @@
 .important {
     font-size: large;
 }
-
 .card {
     max-width: 800px;
     outline: solid 1px black;
+}
+mat-card-content {
+    margin-top: 5px;
 }

@@ -38,4 +38,13 @@ export class ProductComponent implements OnInit {
                 this.product = product
             });
     }
+
+    decorateNumber(num: number|undefined):string {
+        if(num == null) return "";
+        let str = num.toString()
+        if(str.includes("."))
+            return str;
+        else
+            return str + '.00'
+    }
 }

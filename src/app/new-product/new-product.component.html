@@ -2,7 +2,7 @@
 <form autocomplete="off" class="container">
     <div class="form-group">
         <label for="name">Name:</label>
-        <input required maxlength="25" minlength="3" ngModel name="name" id="name" #name="ngModel" type="text" class="form-control">
+        <input required maxlength="25" minlength="3" ngModel name="name" id="name" #name="ngModel" type="text" class=" form_input form-control">
         <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
             <div *ngIf="name.hasError('required')">Name is required</div>
             <div *ngIf="name.hasError('minlength')">Name is minimum 3 symbol</div>
