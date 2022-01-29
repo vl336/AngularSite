@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MarketplaceService} from "./marketplace.service";
-import type {Product} from "./marketplace.service"
+import { Product } from 'src/app/models/product';
+import {Observable} from "rxjs";
+import {MatRadioGroup} from "@angular/material/radio";
+import {ProductService} from "../shared/product.service";
+
 
 @Component({
   selector: 'app-marketplace',
@@ -8,20 +11,25 @@ import type {Product} from "./marketplace.service"
   styleUrls: ['./marketplace.component.css']
 })
 export class MarketplaceComponent implements OnInit {
+    dataSource:any
+    displayedColumns: string[] = ['position', 'name', 'price', 'quantity', 'description'];
 
-    title = "Marketplace.v1";
-    products: Product[];
+    marketplaceType:any
+
     added: boolean = false;
 
-    constructor(service: MarketplaceService) {
-        this.products = service.getProducts();
+    constructor(private service: ProductService) {
+        service.getProducts().subscribe((prods) => {
+            this.dataSource=prods
+            console.log(this.dataSource)
+        });
     }
 
     addProduct(name:string,
                price:number,
                quantity:number,
                manufacturer:string):void {
-        console.log(`add new product with params: ${name}; ${price}; ${quantity}; ${manufacturer}`)
+        console.log(this.marketplaceType)
         this.added = true;
     }
 

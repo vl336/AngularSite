@@ -1,0 +1,42 @@
+
+<form autocomplete="off" class="container">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input required maxlength="25" minlength="3" ngModel name="name" id="name" #name="ngModel" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+            <div *ngIf="name.hasError('required')">Name is required</div>
+            <div *ngIf="name.hasError('minlength')">Name is minimum 3 symbol</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input ngModel name="price" #price="ngModel" id="price" type="number" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input ngModel name="quantity" #quantity="ngModel" id="quantity" type="number" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea ngModel name="description" #description="ngModel" id="description"
+                  class="form-control" cols="50">
+            </textarea>
+    </div>
+    <div class="form-group">
+        <mat-checkbox #agree>I agree with Terms & Privacy policy</mat-checkbox>
+    </div>
+    <div  class="form-group">
+        <button class="btn btn-primary" [disabled]="!agree.checked"
+                (click)="
+                add(
+                {
+                    id:0,uId:0,
+                    name: name.value,  description: description.value,
+                    price: price.value, quantity: quantity.value
+                }
+                )">
+            Add
+        </button>
+        <label *ngIf="added" disabled="true">{{name.value}} was successfully added!</label>
+    </div>
+</form>

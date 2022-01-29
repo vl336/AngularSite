@@ -1,3 +1,10 @@
-.form-control.ng-touched.ng-invalid {
-    border: 1px solid red;
+table {
+    width:100%
+}
+
+ul {
+    list-style: none;
+}
+li {
+    margin-bottom: 10px;
 }

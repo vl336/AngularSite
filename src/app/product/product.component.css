@@ -1,0 +1,8 @@
+.important {
+    font-size: large;
+}
+
+.card {
+    max-width: 800px;
+    outline: solid 1px black;
+}
