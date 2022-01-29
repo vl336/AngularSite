@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Deployment
+Build your project using the Github project name, with the Angular CLI command ng build and the following options, where your_project_name is the name of the project that you gave the GitHub repository in step 1.
+
+Be sure to include the slashes on either side of your project name as in /your_project_name/.
+
+content_copy
+'ng build --output-path docs --base-href /your_project_name/'
+When the build is complete, make a copy of docs/index.html and name it docs/404.html.
+
+Commit your changes and push.
