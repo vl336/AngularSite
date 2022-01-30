@@ -5,6 +5,8 @@ import {Jwt} from "../models/jwt";
 import {CookieService} from "ngx-cookie-service";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {User} from "../models/user";
+import {map} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -15,23 +17,34 @@ export class AccountService {
     username: string|undefined;
     logged:boolean = false;
 
+    user: User|undefined;
+
     constructor(private http: HttpClient,
                 private cookie: CookieService,
                 private router: Router) { }
 
-    public login(email:string, password:string): Observable<Jwt>
-    {
-        let request =  this.http.post<Jwt>(
+    public login(email:string, password:string): Observable<Jwt> {
+        return this.http.post<Jwt>(
             `${environment.backend}/account/login?email=${email}&password=${password}`,
-            null);
-        request.subscribe((token) => {
-            this.saveToCookie(token)
-            console.log(token)
-            this.accessToken = token.access_token
-            this.username = token.username
-            this.logged = true;
-        });
-        return request;
+            null)
+            .pipe(map((token) => {
+                this.saveToCookie(token)
+                this.accessToken = token.access_token
+                this.username = token.username
+                this.logged = true;
+                console.log(token)
+                return token;
+            }));
+    }
+    public register(email:string, password:string): Observable<User>
+    {
+        return this.http.post<User>(
+            `${environment.backend}/account/register?email=${email}&password=${password}`,
+            null)
+            .pipe(map((user: User) => {
+                this.user = user
+                return user;
+            }));
     }
     public quitAccount() {
         this.cookie.delete("token");
@@ -47,6 +60,7 @@ export class AccountService {
             this.accessToken = this.cookie.get("token")
             this.username = this.cookie.get("username")
             this.logged = true;
+            //todo: check if acc exists
         }
     }
     private saveToCookie(jwt: Jwt) {

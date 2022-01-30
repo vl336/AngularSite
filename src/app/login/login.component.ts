@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AccountService} from "../shared/account.service";
 import {Router} from "@angular/router";
+import {first} from "rxjs/operators";
 
 @Component({
     selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     login(email: string, password: string) {
         this.loading = true;
         this.account.login(email, password)
+            .pipe(first())
             .subscribe(
                 () => {
                     this.loading = false;

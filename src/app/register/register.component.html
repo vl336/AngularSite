@@ -17,7 +17,8 @@
             <label for="cPassword">Confirm password</label>
             <input ngModel #cPassword="ngModel" name="cPassword" type="password" id="cPassword" class="form-control"/>
         </div>
-        <div class="alert alert-danger" *ngIf="(password.invalid || cPassword.value != password.value) && password.touched">
+        <div class="alert alert-danger"
+             *ngIf="(password.invalid || (cPassword.value != password.value && cPassword.touched)) && password.touched">
             <div *ngIf="password.touched && password.hasError('required')">
                 Password is required</div>
             <div *ngIf="password.touched && cPassword.touched && cPassword.value != password.value">
@@ -30,6 +31,6 @@
             </button>
             <a routerLink="/login" class="btn btn-link">Login</a>
         </div>
-        <div class="alert alert-danger" *ngIf="hasError">Email or password is incorrect</div>
+        <div class="alert alert-danger" *ngIf="hasError">Account with this email, already exists</div>
     </form>
 </div>
