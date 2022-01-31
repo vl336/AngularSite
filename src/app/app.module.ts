@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from "ngx-cookie-service";
@@ -32,6 +32,8 @@ import { ProductService } from "./shared/product.service";
 import { AccountService } from "./shared/account.service";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductsTableComponent } from './products-table/products-table.component';
+import {AuthInterceptor} from "./shared/auth.interceptor";
 
 const routes = [
     { path: "", component: HomeComponent },
@@ -40,6 +42,7 @@ const routes = [
     { path: "create", component: NewProductComponent },
     { path: "products", component: MarketplaceComponent },
     { path: "product/:id", component: ProductComponent },
+    { path: "products/studio", component: ProductsTableComponent },
     { path: "**", component: NotFoundComponent },
 ]
 
@@ -54,7 +57,8 @@ const routes = [
         HomeComponent,
         FooterComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        ProductsTableComponent
     ],
     imports: [
         BrowserModule,
@@ -74,9 +78,17 @@ const routes = [
         MatPaginatorModule
     ],
     providers: [
+        // SERVICES
         ProductService,
         AccountService,
-        CookieService
+        CookieService,
+
+        // INTERCEPTORS
+        {
+            provide : HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi   : true,
+        },
     ],
     bootstrap: [AppComponent]
 })

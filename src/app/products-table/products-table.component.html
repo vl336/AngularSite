@@ -1,0 +1,43 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 product-table container">
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">{{element.price}} $</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+            mat-row
+            (click)="onClick(row)"
+            [class.product-clicked]="isClicked(row)"
+            *matRowDef="let row; columns: displayedColumns;"
+    ></tr>
+</table>
+
+<div class="container product-info">
+    <div *ngIf="currentRow==null; else productNotNull">
+        <h1 align="center">No product selected</h1>
+        <h2>Create new product: </h2>
+        <app-new-product></app-new-product>
+    </div>
+    <ng-template #productNotNull>
+        <div>
+            <h2>That's how your product looks like at market: </h2>
+            <app-product [product]="currentRow"></app-product>
+        </div>
+        <div class="product-info">
+            <h2>Change product: </h2>
+            <app-new-product [product]="getCopy(currentRow)" [change]="true"></app-new-product>
+        </div>
+    </ng-template>
+</div>

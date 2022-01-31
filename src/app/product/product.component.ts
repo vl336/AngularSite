@@ -17,15 +17,17 @@ export class ProductComponent implements OnInit {
     constructor(private route: ActivatedRoute, private service: ProductService) { }
 
     ngOnInit(): void {
-        this.route.paramMap
-            .subscribe((map) => {
-                let id: any|null = map.get("id")
-                if(id == null) console.log("Something is wrong, id is wrong")
-                else {
-                    this.id = id as number
-                    this.loadProduct(this.id)
-                }
-            });
+        if(this.product == null) {
+            this.route.paramMap
+                .subscribe((map) => {
+                    let id: any | null = map.get("id")
+                    if (id == null) console.log("Something is wrong, id is wrong")
+                    else {
+                        this.id = id as number
+                        this.loadProduct(this.id)
+                    }
+                });
+        }
     }
 
     onClick() {

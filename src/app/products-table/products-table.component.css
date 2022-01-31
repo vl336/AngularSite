@@ -1,0 +1,22 @@
+.product-table {
+    /*width: 50%;*/
+    /*padding-bottom: 50px;*/
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.product-clicked {
+    font-weight: bold;
+}
+
+.product-info {
+    padding-top: 50px;
+}
