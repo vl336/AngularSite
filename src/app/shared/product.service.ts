@@ -17,7 +17,7 @@ export class ProductService {
     }
 
     getProduct(id:number) : Observable<Product> {
-        return this.http.get<Product>(environment.backend+"/products/"+id);
+        return this.http.get<Product>(environment.backend+"/products/" + id);
     }
 
     getMyProducts() : Observable<Product[]> {
@@ -26,5 +26,13 @@ export class ProductService {
 
     addProduct(product: Product): Observable<Product> {
         return this.http.post<Product>(environment.backend+"/products/create", product)
+    }
+
+    deleteProduct(id: number) {
+        return this.http.delete(environment.backend+"/products/delete/" + id)
+    }
+
+    changeProduct(id: number, product: Product) : Observable<Product> {
+        return this.http.put<Product>(environment.backend+"/products/change/" + id, product)
     }
 }

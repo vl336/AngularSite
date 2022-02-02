@@ -1,5 +1,5 @@
-
-<form autocomplete="off" class="container">
+<mat-spinner diameter="50" align="center" *ngIf="!loaded"></mat-spinner>
+<form autocomplete="off" class="container" *ngIf="loaded">
     <div class="form-group">
         <label for="name">Name:</label>
         <input required maxlength="25" minlength="3"
@@ -27,11 +27,18 @@
     <div class="form-group">
         <mat-checkbox #agree>I agree with Terms & Privacy policy</mat-checkbox>
     </div>
-    <div  class="form-group">
-        <button class="btn btn-primary" [disabled]="!agree.checked"
+    <div class="form-group control-buttons">
+        <button mat-raised-button color="primary" class="btn-primary" [disabled]="!agree.checked"
                 (click)="submit()">
             {{change ? "Change" : "Add"}}
         </button>
+        <button mat-raised-button color="warn" class="btn-danger"
+                *ngIf="change"
+                (click)="askForDelete()">Delete</button>
+
+
 <!--        <label *ngIf="added" disabled="true">{{name.value}} was successfully added!</label>-->
+
+
     </div>
 </form>

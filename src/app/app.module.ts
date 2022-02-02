@@ -17,6 +17,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatDialogModule} from '@angular/material/dialog';
 
 // CUSTOM COMPONENTS
 import { HomeComponent } from './home/home.component';
@@ -34,16 +36,17 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductsTableComponent } from './products-table/products-table.component';
 import {AuthInterceptor} from "./shared/auth.interceptor";
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 const routes = [
-    { path: "", component: HomeComponent },
-    { path: "login", component: LoginComponent },
-    { path: "register", component: RegisterComponent },
-    { path: "create", component: NewProductComponent },
-    { path: "products", component: MarketplaceComponent },
-    { path: "product/:id", component: ProductComponent },
-    { path: "products/studio", component: ProductsTableComponent },
-    { path: "**", component: NotFoundComponent },
+    { path: "home",            component: HomeComponent,          data: { title: "Home" }        },
+    { path: "login",           component: LoginComponent,         data: { title: "Login" }       },
+    { path: "register",        component: RegisterComponent,      data: { title: "Register" }    },
+    { path: "create",          component: NewProductComponent,    data: { title: "Create" }      },
+    { path: "products",        component: MarketplaceComponent,   data: { title: "Marketplace" } },
+    { path: "product/:id",     component: ProductComponent,       data: { title: "Product" }     },
+    { path: "products/studio", component: ProductsTableComponent, data: { title: "Studio" }      },
+    { path: "**",              component: NotFoundComponent,      data: { title: "404" }         },
 ]
 
 @NgModule({
@@ -58,7 +61,8 @@ const routes = [
         FooterComponent,
         LoginComponent,
         RegisterComponent,
-        ProductsTableComponent
+        ProductsTableComponent,
+        ConfirmationDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -75,7 +79,9 @@ const routes = [
         MatTableModule,
         MatCardModule,
         MatListModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatDialogModule
     ],
     providers: [
         // SERVICES

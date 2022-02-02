@@ -14,15 +14,11 @@ export class ProductsTableComponent implements OnInit {
     displayedColumns: string[] = ['name','price', 'quantity'];
     dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>();
     currentRow : Product|null = null;
-    update: boolean = false;
 
     constructor(private product:ProductService) {
-        product.getMyProducts()
-            .subscribe((products) => {
-                this.dataSource.data = products;
-                console.log(products)
-            });
+        this.loadProducts();
     }
+
 
     ngOnInit(): void {
     }
@@ -32,12 +28,33 @@ export class ProductsTableComponent implements OnInit {
     }
 
     isClicked(row:Product) {
-        return this.currentRow == row
+        return this.currentRow?.id == row.id
     }
 
     getCopy(currentRow: Product|null): Product {
-        let copy: Product = {}as Product;
-        Object.assign(copy, currentRow as Product);
-        return copy;
+        // console.log("copy called")
+        // let copy: Product = {}as Product;
+        // Object.assign(copy, currentRow as Product);
+        return currentRow as Product;
+    }
+
+    update(changedProduct: Product|null = null) {
+        this.currentRow = null;
+        this.loadProducts();
+    }
+
+    private loadProducts() {
+        this.product.getMyProducts()
+            .subscribe((products) => {
+                this.dataSource.data = products;
+                console.log(products)
+            });
+    }
+
+    getId(): string {
+        if(this.currentRow != null)
+            return (this.currentRow as Product).id.toString()
+        else
+            return "-1";
     }
 }

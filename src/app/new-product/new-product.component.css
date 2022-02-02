@@ -9,3 +9,7 @@ textarea{
 /*form {*/
 /*    width: 40%;*/
 /*}*/
+.control-buttons {
+    display: flex;
+    justify-content: space-between;
+}
