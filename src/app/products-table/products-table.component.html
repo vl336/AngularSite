@@ -28,8 +28,11 @@
     <span style="padding: 10px"></span>
 
     <mat-paginator class="container"
-                   [length]="100"
-                   [pageSize]="10"
+                   [length]="totalProducts"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [pageIndex]="pageIndex"
+                   (page)="paginatorUpdated($event)"
                    aria-label="Select page">
     </mat-paginator>
 </div>
@@ -38,7 +41,7 @@
     <div *ngIf="currentRow==null; else productNotNull">
         <h1 align="center">No product selected</h1>
         <h2>Create new product: </h2>
-        <app-new-product (submitted)="update($event)"></app-new-product>
+        <app-input-product (submitted)="update($event)"></app-input-product>
     </div>
     <ng-template #productNotNull>
         <div>
@@ -47,7 +50,7 @@
         </div>
         <div class="product-info">
             <h2>Change product: </h2>
-            <app-new-product [idString]="getId()"  [change]="true" (submitted)="update($event)"></app-new-product>
+            <app-input-product [idString]="getId()"  [change]="true" (submitted)="update($event)"></app-input-product>
         </div>
     </ng-template>
 </div>

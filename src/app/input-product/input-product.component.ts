@@ -6,11 +6,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-    selector: 'app-new-product',
-    templateUrl: './new-product.component.html',
-    styleUrls: ['./new-product.component.css']
+    selector: 'app-input-product',
+    templateUrl: './input-product.component.html',
+    styleUrls: ['./input-product.component.css']
 })
-export class NewProductComponent implements OnInit, OnChanges {
+export class InputProductComponent implements OnInit, OnChanges {
 
     loaded: boolean = true;
 

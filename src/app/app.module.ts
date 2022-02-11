@@ -24,7 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
-import { NewProductComponent } from './new-product/new-product.component';
+import { InputProductComponent } from './input-product/input-product.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FooterComponent } from './footer/footer.component';
@@ -42,7 +42,7 @@ const routes = [
     { path: "home",            component: HomeComponent,          data: { title: "Home" }        },
     { path: "login",           component: LoginComponent,         data: { title: "Login" }       },
     { path: "register",        component: RegisterComponent,      data: { title: "Register" }    },
-    { path: "create",          component: NewProductComponent,    data: { title: "Create" }      },
+    { path: "create",          component: InputProductComponent,    data: { title: "Create" }      },
     { path: "products",        component: MarketplaceComponent,   data: { title: "Marketplace" } },
     { path: "product/:id",     component: ProductComponent,       data: { title: "Product" }     },
     { path: "products/studio", component: ProductsTableComponent, data: { title: "Studio" }      },
@@ -54,7 +54,7 @@ const routes = [
         AppComponent,
         ProductComponent,
         MarketplaceComponent,
-        NewProductComponent,
+        InputProductComponent,
         NavbarComponent,
         NotFoundComponent,
         HomeComponent,
@@ -62,7 +62,7 @@ const routes = [
         LoginComponent,
         RegisterComponent,
         ProductsTableComponent,
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
     ],
     imports: [
         BrowserModule,

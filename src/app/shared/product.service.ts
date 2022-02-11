@@ -24,6 +24,14 @@ export class ProductService {
         return this.http.get<Product[]>(environment.backend+"/products/my");
     }
 
+    getMyProductsByQuota(quota: number, step: number) : Observable<Product[]> {
+        return this.http.get<Product[]>(environment.backend+"/products/my?quota=" + quota + "&step=" + step);
+    }
+
+    getMyTotal() : Observable<number> {
+        return this.http.get<number>(environment.backend + "/products/my/total")
+    }
+
     addProduct(product: Product): Observable<Product> {
         return this.http.post<Product>(environment.backend+"/products/create", product)
     }
